@@ -1,0 +1,101 @@
+/* ExpenseTracker.css */
+.expense-tracker {
+  margin-top: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  font-family: Arial, sans-serif;
+  max-width: 400px;
+  margin: 0 auto;
+  background-color: #eea9a9;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.expense-tracker h2 {
+  margin-bottom: 20px;
+  text-align: center;
+  color: #333;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #555;
+}
+
+.form-group input,
+.form-group select {
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+}
+
+.form-group select {
+  cursor: pointer;
+}
+
+.form-group button {
+  padding: 8px 16px;
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  outline: none;
+  transition: background-color 0.2s;
+}
+
+.form-group button:hover {
+  background-color: #45a049;
+}
+
+.expense-list {
+  margin-top: 30px;
+}
+
+.expense-list h3 {
+  text-align: center;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.expense-list .cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.expense-card {
+  background-color: #fff;
+  padding: 10px;
+  margin: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  width: 200px;
+}
+
+.expense-card-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.expense-card-field {
+  margin-bottom: 5px;
+}
+
+.expense-card-field strong {
+  font-weight: bold;
+  color: #555;
+}
+
+.expense-card-field span {
+  color: #888;
+}
