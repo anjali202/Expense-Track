@@ -4,16 +4,16 @@
   padding: 20px;
   border: 1px solid #ccc;
   font-family: Arial, sans-serif;
-  max-width: 400px;
+  max-width: 700px;
   margin: 0 auto;
-  background-color: #eea9a9;
+  background-color: #9b95e0;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .expense-tracker h2 {
   margin-bottom: 20px;
   text-align: center;
-  color: #333;
+  color: #0b0b0b;
 }
 
 .form-group {
@@ -60,42 +60,94 @@
   margin-top: 30px;
 }
 
-.expense-list h3 {
-  text-align: center;
-  margin-bottom: 10px;
-  color: #333;
-}
-
-.expense-list .cards-container {
+.expense-item {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.expense-card {
+  justify-content: space-between;
+  align-items: center;
   background-color: #fff;
   padding: 10px;
   margin: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  width: 200px;
 }
 
-.expense-card-content {
+.expense-item p {
+  margin: 0;
+}
+
+.expense-item button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  outline: none;
+  transition: background-color 0.2s;
+}
+
+.expense-item button:hover {
+  background-color: #0056b3;
+}
+
+
+.top-bar {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #f2f2f2;
+  border-bottom: 1px solid #ccc;
 }
 
-.expense-card-field {
-  margin-bottom: 5px;
+.activate-premium-button,
+.download-file-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
-.expense-card-field strong {
-  font-weight: bold;
-  color: #555;
+.theme-switch {
+  display: flex;
+  align-items: center;
 }
 
-.expense-card-field span {
-  color: #888;
+.theme-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: relative;
+  display: inline-block;
+  width: 30px;
+  height: 15px;
+  background-color: #ccc;
+  border-radius: 15px;
+  transition: background-color 0.3s;
+}
+
+.slider:before {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: white;
+  top: -3.5px;
+  left: -3.5px;
+  transition: transform 0.3s;
+}
+
+input:checked + .slider {
+  background-color: #007bff;
+}
+
+input:checked + .slider:before {
+  transform: translateX(15px);
 }

@@ -7,6 +7,7 @@ import CompleteProfile from '../Profile/CompleteProfile';
 import { getAuth, signOut } from 'firebase/auth';
 import firebaseApp from '../../firebase';
 import { getDatabase, ref, onValue } from 'firebase/database';
+import Header from '../Home/Header';
 import ExpenseTracker from '../ExpenseTracker/ExpenseTracker';
 
 
@@ -20,11 +21,6 @@ const Dashboard = () => {
   const user = auth.currentUser;
 
   const count = useSelector((state) => state.count);
-
-
- 
-
- 
 
   const handleCompleteProfile = () => {
     setProfileCompleted(true);
@@ -71,24 +67,23 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard-container">
-      <header className="dashboard-header">
-        <h1>Welcome to Expense Tracker</h1>
-        <button onClick={handleLogout}>Logout</button>
-      </header>
-      {isLoading ? (
-        <div>Loading...</div>
-      ) : !profileCompleted ? (
-        <IncompleteProfile onClickComplete={handleCompleteProfile} />
-      ) : (
-        <>
-          <CompleteProfile />
-          <ExpenseTracker />
-         
-         
-        </>
-      )}
-    </div>
-  );
+    <header className="dashboard-header">
+      <br></br>
+      <button onClick={handleLogout}>Logout</button>
+    </header>
+    {isLoading ? (
+      <div>Loading...</div>
+    ) : !profileCompleted ? (
+      <IncompleteProfile onClickComplete={handleCompleteProfile} />
+    ) : (
+      <>
+       
+        <ExpenseTracker />
+      </>
+    )}
+  </div>
+);
+  
 };
 
 export default Dashboard;

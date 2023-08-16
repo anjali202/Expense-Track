@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import firebaseApp from '../../firebase';
 import './Login.css';
@@ -7,9 +7,7 @@ import './Login.css';
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loginError, setLoginError] = useState('');
-  const navigate = useNavigate();
 
   const isEmailValid = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -25,27 +23,17 @@ const Login = () => {
     try {
       const auth = getAuth();
       await signInWithEmailAndPassword(auth, email, password);
-      // User has successfully logged in
-      setIsAuthenticated(true);
       setLoginError('');
-      // Redirect to the dashboard
-      navigate('/dashboard');
     } catch (error) {
       setLoginError('Invalid email or password. Please try again.');
       console.error('Error logging in:', error);
     }
   };
 
-  if (isAuthenticated) {
-    // If the user is logged in, redirect to the dashboard
-    navigate('/dashboard');
-    return null; 
-  }
-
   return (
     <div className="container">
       <h2>Login</h2>
-      <form onSubmit={(e) => e.preventDefault()} className="login-form">
+      <form className="login-form">
         <div className="form-group">
           <label htmlFor="email">Email</label>
           <input
@@ -64,7 +52,11 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <button type="submit" className="button-primary" onClick={handleLogin}>
+        <button
+          type="button"
+          className="button-primary"
+          onClick={handleLogin}
+        >
           Login
         </button>
       </form>

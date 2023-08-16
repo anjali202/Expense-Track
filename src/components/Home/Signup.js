@@ -1,24 +1,16 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import { Link } from 'react-router-dom';
+import { getAuth, createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth';
 import firebaseApp from '../../firebase';
-import firebase from 'firebase/compat/app';
-import 'firebase/compat/auth';
- import firebaseConfig from '../../firebaseConfig'; // Import the Firebase configuration
 import './Signup.css';
-
-
-
-if (!firebase.apps.length) {
-  firebase.initializeApp(firebaseConfig);
-}
 
 const Signup = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [verificationSent, setVerificationSent] = useState(false); // To track whether verification email is sent
-  const navigate = useNavigate();
+  const [verificationSent, setVerificationSent] = useState(false);
+
+  const auth = getAuth(firebaseApp); // Add this line to get the auth instance
 
   const handleSignup = async (e) => {
     e.preventDefault();
@@ -28,16 +20,13 @@ const Signup = () => {
     }
 
     try {
-      // Create user account using Firebase Authentication
-      await firebase.auth().createUserWithEmailAndPassword(email, password);
-      console.log('User has successfully signed up.');
+      // Use the auth instance to create a user with email and password
+      await createUserWithEmailAndPassword(auth, email, password);
 
-      // Send email verification
-      const user = firebase.auth().currentUser;
+      const user = auth.currentUser;
       if (user) {
-        await user.sendEmailVerification();
-        setVerificationSent(true); // Set verificationSent state to true
-        console.log('Verification email sent.');
+        await sendEmailVerification(user);
+        setVerificationSent(true);
       }
 
     } catch (error) {
@@ -49,41 +38,46 @@ const Signup = () => {
     <div className="signup-container">
       <form className="signup-form" onSubmit={handleSignup}>
         <h2>Sign Up</h2>
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        <input
-          type="password"
-          placeholder="Confirm Password"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-          required
-        />
+        <div className="form-group">
+          <label htmlFor="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="confirmPassword">Confirm Password</label>
+          <input
+            type="password"
+            id="confirmPassword"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+          />
+        </div>
         <button type="submit">Sign Up</button>
         <p>
           Have an account already? <Link to="/login">Login</Link>
         </p>
-
         {!verificationSent && (
           <button
+            type="button"
             onClick={async () => {
               try {
-                const user = firebase.auth().currentUser;
+                const user = auth.currentUser;
                 if (user) {
-                  await user.sendEmailVerification();
+                  await sendEmailVerification(user);
                   setVerificationSent(true);
-                  console.log('Verification email sent.');
                 }
               } catch (error) {
                 alert(error.message);

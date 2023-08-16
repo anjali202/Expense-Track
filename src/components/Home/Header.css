@@ -1,0 +1,34 @@
+/* Header.css */
+header {
+  background-color: #0a000a;
+  color: white;
+  padding: 50px 0;
+  text-align:center; /* Center the heading */
+}
+
+.expense-tracker-title {
+  font-size: 50px;
+  margin: 0;
+}
+
+nav ul {
+  list-style: none;
+  display:-webkit-inline-flex;
+  justify-content: center;
+  margin-top: 30px; /* Add some spacing between heading and navigation */
+}
+
+nav ul li {
+  margin: 0 10px;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold; /* Make navigation links bold */
+  transition: color 0.2s;
+}
+
+nav ul li a:hover {
+  color: #007bff; /* Change link color on hover */
+}
